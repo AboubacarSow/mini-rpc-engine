@@ -1,6 +1,6 @@
-using rpc.Protocol;
+using engine.Protocol;
 
-namespace rpc.Core.Interfaces;
+namespace engine.Core.Interfaces;
 
 public interface IRpcRequestHandler
 {

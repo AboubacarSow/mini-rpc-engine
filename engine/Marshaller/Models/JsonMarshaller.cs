@@ -1,9 +1,9 @@
-using rpc.Marshaller.Interfaces;
+using engine.Marshaller.Interfaces;
 using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Text.Json;
 
-namespace rpc.Marshaller.Models;
+namespace engine.Marshaller.Models;
 
 public class JsonMarshaller : IMarshaller
 {

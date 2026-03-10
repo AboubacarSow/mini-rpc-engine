@@ -1,4 +1,4 @@
-namespace rpc.Protocol;
+namespace engine.Protocol;
 
 public record Result
 {

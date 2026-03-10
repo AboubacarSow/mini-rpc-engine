@@ -1,4 +1,4 @@
-namespace rpc.Marshaller.Interfaces;
+namespace engine.Marshaller.Interfaces;
 
 public interface IMarshaller
 {

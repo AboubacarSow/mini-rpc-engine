@@ -1,6 +1,5 @@
-using rpc.Protocol;
 
-namespace rpc.Protocol;
+namespace engine.Protocol;
 
 public class RpcResponse
 {
