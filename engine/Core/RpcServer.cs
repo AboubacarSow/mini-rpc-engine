@@ -10,11 +10,11 @@ using Microsoft.Extensions.Logging;
 namespace engine.Core;
 
 public class RpcServer(TransportListener transport,ILogger<RpcServer> logger,
-JsonMarshaller marshaller) : BackgroundService
+JsonMarshaller marshaller,IRpcRequestHandler rpcProxy) : BackgroundService
 {
     private readonly TransportListener _transportListener = transport;
     private readonly JsonMarshaller _marshaller= marshaller;
-    private readonly IRpcRequestHandler _rpcProxy;
+    private readonly IRpcRequestHandler _rpcProxy =rpcProxy;
     private readonly ILogger<RpcServer> _logger= logger;
 
 
@@ -23,7 +23,7 @@ JsonMarshaller marshaller) : BackgroundService
          _transportListener.Start();
         try
         {
-
+      
             while (!stoppingToken.IsCancellationRequested)
             {
                 var channel =await _transportListener.AcceptConnectionAsync();
@@ -52,13 +52,13 @@ JsonMarshaller marshaller) : BackgroundService
                     var data = await channel.ReceiveAsync(cancellationToken);
                     if(data == null) break;
                     var request = _marshaller.UnMarshal<RpcRequest>(data);
-                    var response = await _rpcProxy.Handler(request);
+                    var response = _rpcProxy.Handle(request);
                     var bytes = _marshaller.Marshal(response);
                     await channel.SendAsync(bytes, cancellationToken);
                     
                 }
             }
-            catch(Exception ex)
+            catch(Exception )
             {
                 channel.Dispose();
             }

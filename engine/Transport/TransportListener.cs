@@ -3,6 +3,7 @@ using engine.Marshaller.Models;
 using engine.Protocol;
 using System.Net;
 using System.Net.Sockets;
+using Microsoft.Extensions.Configuration;
 
 namespace engine.Transport;
 
@@ -10,15 +11,13 @@ namespace engine.Transport;
 
 public class TransportListener(ILogger<TransportListener> logger) :IDisposable
 {
-    internal readonly TcpListener _listener = new(IPAddress.Any,0);
+    internal readonly TcpListener _listener = new(IPAddress.Any,50000);
     private readonly ILogger<TransportListener> _logger = logger;
+    private int? Port { get; set; }
     public void Start()
     {
         _listener.Start();
-        int boundedPort = ((IPEndPoint)_listener.LocalEndpoint).Port;
-
-        _logger.LogInformation(message: "Server RPC Listening on Port:[@boundedPort]",
-                               boundedPort);
+        _logger.LogInformation(message: $"Server RPC Listening on Port:{50000}");
     }
     public async Task<TransportChannel> AcceptConnectionAsync()
     {
@@ -30,5 +29,10 @@ public class TransportListener(ILogger<TransportListener> logger) :IDisposable
     public void Dispose()
     {
         _listener?.Stop();
+    }
+
+    public int? GetPort()
+    {
+        return Port;
     }
 }

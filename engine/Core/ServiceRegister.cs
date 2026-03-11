@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace engine.Core;
 
-public class Register
+public class ServiceRegister
 {
-    public Dictionary<string, object> _services { get; set; }
+    public Dictionary<string, object> _services { get; set; } = new();
 
     public void AddService(string  serviceName, object service)
     {

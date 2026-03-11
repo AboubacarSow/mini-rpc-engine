@@ -3,6 +3,7 @@ using engine.Core.Interfaces;
 using engine.Marshaller.Models;
 using engine.Transport;
 using Microsoft.Extensions.DependencyInjection;
+using System.Net.Sockets;
 
 namespace engine.Extensions;
 
@@ -12,20 +13,23 @@ public static class DependencyInjection
     {
         services.AddSingleton<IRpcRequestHandler, RpcProxy>();
 
-        services.AddSingleton<TransportListener>();
+        services.AddTransient<TransportListener>();
         services.AddSingleton<JsonMarshaller>();
-        services.AddHostedService<RpcServer>();
+      
+        services.AddTransient<IRpcClient, RpcClient>();
+        services.AddTransient<TcpClient>();
 
+        services.AddHostedService<RpcServer>();
 
         return services;
     }
 
-    public static void AddServices(this IServiceCollection services,Action<Register> config)
+    public static void AddServices(this IServiceCollection services,Action<ServiceRegister> serviceRegister)
     {
+   
+        var register = new ServiceRegister();
 
-        var register = new Register();
-
-        config(register);
+        serviceRegister(register);
 
         services.AddSingleton(register);
     }

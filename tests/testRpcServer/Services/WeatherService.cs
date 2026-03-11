@@ -1,20 +1,18 @@
+using testRpcServer.Models;
+
 namespace testRpcServer.Services;
 
 public class WeatherService
 {
-    private List<string> _summaries = new[]
-    {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+ 
 
-    private readonly List<WeatherForcast> _weatherForcasts=Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
+    private readonly List<WeatherForcast> _weatherForcasts= [.. Enumerable.Range(1, 5).Select(index =>
+        new WeatherForcast
         (
             DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             Random.Shared.Next(-20, 55),
-            _summaries[Random.Shared.Next(_summaries.Length)]
-        ))
-        .ToArray();
+            WeatherForcast.Summaries[Random.Shared.Next(WeatherForcast.Summaries.Count)]
+        ))];
     
     public List<WeatherForcast> GetAllWeatherForcast()
     {
