@@ -1,12 +1,6 @@
-﻿namespace testRpcClient.Interface
-{
-    public interface IWeatherService
-    {
-        List<WeatherForcast> GetAllWeatherForcast();
-    }
+﻿namespace testRpcClient.Interface;
 
-    public record WeatherForcast(DateOnly Date, int TemperatureC, string? Summary)
-    {
-       
-    }
+public interface IWeatherService
+{
+    object GetWeatherForcast();
 }

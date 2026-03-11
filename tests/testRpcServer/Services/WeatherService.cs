@@ -14,7 +14,7 @@ public class WeatherService
             WeatherForcast.Summaries[Random.Shared.Next(WeatherForcast.Summaries.Count)]
         ))];
     
-    public List<WeatherForcast> GetAllWeatherForcast()
+    public List<WeatherForcast> GetWeatherForcast()
     {
         return _weatherForcasts;
     }

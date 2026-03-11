@@ -10,11 +10,10 @@ namespace engine.Core;
 public class RpcClient(TcpClient client): IRpcClient
 {
     private readonly JsonMarshaller _marshaller = new();
-    public async Task<RpcResponse> CallAsync(string serviceName, string method,
-        CancellationToken cancellationToken = default, params object[] parameters)
+    public async Task<RpcResponse> CallAsync(RpcRequest request,
+        CancellationToken cancellationToken = default)
     {
         var _channel = new TransportChannel(client.GetStream());
-        RpcRequest request = new(serviceName, method, parameters);
         var data = _marshaller.Marshal(request);
 
         await _channel.SendAsync(data,cancellationToken);

@@ -5,6 +5,6 @@ namespace engine.Core.Interfaces;
 
 public interface IRpcClient
 {
-    public Task<RpcResponse> CallAsync(string serviceName,string method,
-    CancellationToken cancellationToken = default,params object[] parameters);
+    public Task<RpcResponse> CallAsync(RpcRequest request,
+    CancellationToken cancellationToken = default);
 }
