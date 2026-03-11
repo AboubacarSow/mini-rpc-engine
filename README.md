@@ -1,8 +1,8 @@
-# Lightweight RPC Engine (C#)
+# A Lightweight RPC Engine (C#)
 
-A minimal Remote Procedure Call (RPC) framework built with TCP sockets in C#.
+A lightweight Remote Procedure Call (RPC) framework built with TCP sockets in C#.
 
-The project explores how RPC systems work internally by implementing the core mechanisms from scratch.
+#### The project explores how RPC systems work internally by implementing the core mechanisms from scratch.
 
 ---
 
@@ -63,7 +63,7 @@ The framework is organized into multiple layers to ensure a separation of concer
 | **Core** | Handles request dispatching and service invocation using Reflection. |
 | **Wrapper** | Abstracts the Server/Client to mimic modern frameworks like gRPC. |
 
-> **Note:** While gRPC is the industry standard framework built by Google.
+> **Note:** gRPC is the industry standard framework built by Google.
 
 ---
 
